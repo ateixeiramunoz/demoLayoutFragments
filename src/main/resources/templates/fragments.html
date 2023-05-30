@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<div th:fragment="footer" >
+  Footer
+</div>
+
+
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul sec:authorize="!isAuthenticated()" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/login}">Login</a>
+        </li>
+      </ul>
+      <ul sec:authorize="isAuthenticated()" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/" th:text="#{hola}"></a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+          <a class="nav-link" th:href="@{/usuarios/all}">Usuarios</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+          <a class="nav-link" th:href="@{/usuarios/paginados?numeroPagina=0&tamanoPagina=20}">Usuarios Paginados</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+          <a class="nav-link" th:href="@{/roles/all}">Roles</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+          <a class="nav-link" th:href="@{/permisos/all}">Permisos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/empresas/all}">Empresa</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div th:fragment="tarjeta" class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title" th:text="${usuario.name}"></h5>
+    <p class="card-text" th:text="${usuario.descripcion}"></p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
